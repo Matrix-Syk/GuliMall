@@ -1,7 +1,7 @@
 package com.matrix.gulimall.product.dao;
 
-import com.matrix.gulimall.product.entity.CategoryEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.matrix.gulimall.product.entity.CategoryEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface CategoryDao extends BaseMapper<CategoryEntity> {
-	
+
 }
