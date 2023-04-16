@@ -10,15 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.Map;
 
-
-
-/**
- * ????&???Է???????
- *
- * @author matrix
- * @email sunlightcs@gmail.com
- * @date 2023-04-06 22:16:26
- */
 @RestController
 @RequestMapping("product/attrattrgrouprelation")
 public class AttrAttrgroupRelationController {
@@ -29,7 +20,6 @@ public class AttrAttrgroupRelationController {
      * 列表
      */
     @RequestMapping("/list")
-//    //@RequiresPermissions("product:attrattrgrouprelation:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = attrAttrgroupRelationService.queryPage(params);
 
