@@ -2,16 +2,17 @@ package com.matrix.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
 
 /**
- * spuͼƬ
+ * spu图片
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-06 22:16:26
+ * @date 2023-04-16 20:37:16
  */
 @Data
 @TableName("pms_spu_images")
@@ -28,19 +29,19 @@ public class SpuImagesEntity implements Serializable {
 	 */
 	private Long spuId;
 	/**
-	 * ͼƬ??
+	 * 图片名
 	 */
 	private String imgName;
 	/**
-	 * ͼƬ??ַ
+	 * 图片地址
 	 */
 	private String imgUrl;
 	/**
-	 * ˳?
+	 * 顺序
 	 */
 	private Integer imgSort;
 	/**
-	 * ?Ƿ?Ĭ??ͼ
+	 * 是否默认图
 	 */
 	private Integer defaultImg;
 

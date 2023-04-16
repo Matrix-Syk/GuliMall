@@ -2,16 +2,17 @@ package com.matrix.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
 
 /**
- * ??Ʒ???ۻظ???ϵ
+ * 商品评价回复关系
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-06 22:16:26
+ * @date 2023-04-16 20:37:16
  */
 @Data
 @TableName("pms_comment_replay")
@@ -24,11 +25,11 @@ public class CommentReplayEntity implements Serializable {
 	@TableId
 	private Long id;
 	/**
-	 * ????id
+	 * 评论id
 	 */
 	private Long commentId;
 	/**
-	 * ?ظ?id
+	 * 回复id
 	 */
 	private Long replyId;
 

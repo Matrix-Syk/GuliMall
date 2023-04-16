@@ -2,23 +2,17 @@ package com.matrix.gulimall.product.controller;
 
 import com.matrix.common.utils.PageUtils;
 import com.matrix.common.utils.R;
+import com.matrix.common.validator.group.AddGroup;
 import com.matrix.gulimall.product.entity.BrandEntity;
 import com.matrix.gulimall.product.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Map;
 
 
-
-/**
- * Ʒ?
- *
- * @author matrix
- * @email sunlightcs@gmail.com
- * @date 2023-04-07 00:18:37
- */
 @RestController
 @RequestMapping("product/brand")
 public class BrandController {
@@ -30,7 +24,7 @@ public class BrandController {
      */
     @RequestMapping("/list")
 //  @RequiresPermissions("product:brand:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = brandService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -42,20 +36,30 @@ public class BrandController {
      */
     @RequestMapping("/info/{brandId}")
 //  @RequiresPermissions("product:brand:info")
-    public R info(@PathVariable("brandId") Long brandId){
-		BrandEntity brand = brandService.getById(brandId);
+    public R info(@PathVariable("brandId") Long brandId) {
+        BrandEntity brand = brandService.getById(brandId);
 
         return R.ok().put("brand", brand);
     }
 
     /**
      * 保存
+     * 参数不接受bindingresult就会将异常抛出，交给统一的异常处理类
      */
     @RequestMapping("/save")
-//  @RequiresPermissions("product:brand:save")
-    public R save(@RequestBody BrandEntity brand){
-		brandService.save(brand);
+    public R save(@Validated(value = {AddGroup.class}) @RequestBody BrandEntity brand) {
+        /*Map map = new HashMap<String, String>();
+        if (result.hasErrors()) {
+            result.getFieldErrors().forEach((item) -> {
+                String message = item.getDefaultMessage();
+                String field = item.getField();
+                map.put(field, message);
+            });
+            return R.error(400, "提交的数据不合法").put("data", map);
+        } else {
 
+        }*/
+        brandService.save(brand);
         return R.ok();
     }
 
@@ -63,9 +67,8 @@ public class BrandController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:brand:update")
-    public R update(@RequestBody BrandEntity brand){
-		brandService.updateById(brand);
+    public R update(@RequestBody BrandEntity brand) {
+        brandService.updateById(brand);
 
         return R.ok();
     }
@@ -74,9 +77,8 @@ public class BrandController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:brand:delete")
-    public R delete(@RequestBody Long[] brandIds){
-		brandService.removeByIds(Arrays.asList(brandIds));
+    public R delete(@RequestBody Long[] brandIds) {
+        brandService.removeByIds(Arrays.asList(brandIds));
 
         return R.ok();
     }

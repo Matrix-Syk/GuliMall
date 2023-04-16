@@ -9,11 +9,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ?ɹ???Ϣ
+ * 采购信息
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-08 00:17:24
+ * @date 2023-04-16 19:57:38
  */
 @Data
 @TableName("wms_purchase")
@@ -21,44 +21,44 @@ public class PurchaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * ?ɹ???id
+	 * 采购单id
 	 */
 	@TableId
 	private Long id;
 	/**
-	 * ?ɹ???id
+	 * 采购人id
 	 */
 	private Long assigneeId;
 	/**
-	 * ?ɹ?????
+	 * 采购人名
 	 */
 	private String assigneeName;
 	/**
-	 * ??ϵ??ʽ
+	 * 联系方式
 	 */
 	private String phone;
 	/**
-	 * ???ȼ?
+	 * 优先级
 	 */
 	private Integer priority;
 	/**
-	 * ״̬
+	 * 状态
 	 */
 	private Integer status;
 	/**
-	 * ?ֿ?id
+	 * 仓库id
 	 */
 	private Long wareId;
 	/**
-	 * ?ܽ
+	 * 总金额
 	 */
 	private BigDecimal amount;
 	/**
-	 * ???????
+	 * 创建日期
 	 */
 	private Date createTime;
 	/**
-	 * ???????
+	 * 更新日期
 	 */
 	private Date updateTime;
 

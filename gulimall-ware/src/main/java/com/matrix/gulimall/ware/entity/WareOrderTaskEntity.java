@@ -2,17 +2,17 @@ package com.matrix.gulimall.ware.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
- * ???湤????
+ * 库存工作单
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-08 00:17:24
+ * @date 2023-04-16 19:57:38
  */
 @Data
 @TableName("wms_ware_order_task")
@@ -33,35 +33,35 @@ public class WareOrderTaskEntity implements Serializable {
 	 */
 	private String orderSn;
 	/**
-	 * ?ջ??
+	 * 收货人
 	 */
 	private String consignee;
 	/**
-	 * ?ջ??˵绰
+	 * 收货人电话
 	 */
 	private String consigneeTel;
 	/**
-	 * ???͵?ַ
+	 * 配送地址
 	 */
 	private String deliveryAddress;
 	/**
-	 * ??????ע
+	 * 订单备注
 	 */
 	private String orderComment;
 	/**
-	 * ???ʽ?? 1:???߸??? 2:???????
+	 * 付款方式【 1:在线付款 2:货到付款】
 	 */
 	private Integer paymentWay;
 	/**
-	 * ????״̬
+	 * 任务状态
 	 */
 	private Integer taskStatus;
 	/**
-	 * ????????
+	 * 订单描述
 	 */
 	private String orderBody;
 	/**
-	 * ???????
+	 * 物流单号
 	 */
 	private String trackingNo;
 	/**
@@ -69,11 +69,11 @@ public class WareOrderTaskEntity implements Serializable {
 	 */
 	private Date createTime;
 	/**
-	 * ?ֿ?id
+	 * 仓库id
 	 */
 	private Long wareId;
 	/**
-	 * ????????ע
+	 * 工作单备注
 	 */
 	private String taskComment;
 

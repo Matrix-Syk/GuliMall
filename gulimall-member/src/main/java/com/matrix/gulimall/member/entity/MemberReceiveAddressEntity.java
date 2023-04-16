@@ -8,11 +8,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ??Ա?ջ???ַ
+ * 会员收货地址
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-07 23:59:48
+ * @date 2023-04-16 20:07:55
  */
 @Data
 @TableName("ums_member_receive_address")
@@ -29,39 +29,39 @@ public class MemberReceiveAddressEntity implements Serializable {
 	 */
 	private Long memberId;
 	/**
-	 * ?ջ???????
+	 * 收货人姓名
 	 */
 	private String name;
 	/**
-	 * ?绰
+	 * 电话
 	 */
 	private String phone;
 	/**
-	 * ???????
+	 * 邮政编码
 	 */
 	private String postCode;
 	/**
-	 * ʡ??/ֱϽ?
+	 * 省份/直辖市
 	 */
 	private String province;
 	/**
-	 * ???
+	 * 城市
 	 */
 	private String city;
 	/**
-	 * ??
+	 * 区
 	 */
 	private String region;
 	/**
-	 * ??ϸ??ַ(?ֵ?)
+	 * 详细地址(街道)
 	 */
 	private String detailAddress;
 	/**
-	 * ʡ???????
+	 * 省市区代码
 	 */
 	private String areacode;
 	/**
-	 * ?Ƿ?Ĭ?
+	 * 是否默认
 	 */
 	private Integer defaultStatus;
 

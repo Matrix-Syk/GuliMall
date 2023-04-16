@@ -2,16 +2,17 @@ package com.matrix.gulimall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
 
 /**
- * ????&???Է???????
+ * 属性&属性分组关联
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-06 22:16:26
+ * @date 2023-04-16 20:37:16
  */
 @Data
 @TableName("pms_attr_attrgroup_relation")
@@ -24,15 +25,15 @@ public class AttrAttrgroupRelationEntity implements Serializable {
 	@TableId
 	private Long id;
 	/**
-	 * ????id
+	 * 属性id
 	 */
 	private Long attrId;
 	/**
-	 * ???Է???id
+	 * 属性分组id
 	 */
 	private Long attrGroupId;
 	/**
-	 * ???????????
+	 * 属性组内排序
 	 */
 	private Integer attrSort;
 

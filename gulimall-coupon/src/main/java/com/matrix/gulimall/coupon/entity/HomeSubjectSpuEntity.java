@@ -8,11 +8,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ר????Ʒ
+ * 专题商品
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-07 23:49:24
+ * @date 2023-04-16 20:21:25
  */
 @Data
 @TableName("sms_home_subject_spu")
@@ -25,11 +25,11 @@ public class HomeSubjectSpuEntity implements Serializable {
 	@TableId
 	private Long id;
 	/**
-	 * ר?????
+	 * 专题名字
 	 */
 	private String name;
 	/**
-	 * ר??id
+	 * 专题id
 	 */
 	private Long subjectId;
 	/**
@@ -37,7 +37,7 @@ public class HomeSubjectSpuEntity implements Serializable {
 	 */
 	private Long spuId;
 	/**
-	 * ???
+	 * 排序
 	 */
 	private Integer sort;
 

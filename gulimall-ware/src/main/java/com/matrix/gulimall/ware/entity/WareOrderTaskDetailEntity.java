@@ -8,11 +8,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ???湤????
+ * 库存工作单
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-08 00:17:24
+ * @date 2023-04-16 19:57:38
  */
 @Data
 @TableName("wms_ware_order_task_detail")
@@ -33,11 +33,11 @@ public class WareOrderTaskDetailEntity implements Serializable {
 	 */
 	private String skuName;
 	/**
-	 * ????????
+	 * 购买个数
 	 */
 	private Integer skuNum;
 	/**
-	 * ??????id
+	 * 工作单id
 	 */
 	private Long taskId;
 

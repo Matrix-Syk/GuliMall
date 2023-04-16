@@ -9,11 +9,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ??Ʒ??????Ϣ
+ * 商品满减信息
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-07 23:49:24
+ * @date 2023-04-16 20:21:25
  */
 @Data
 @TableName("sms_sku_full_reduction")
@@ -30,15 +30,15 @@ public class SkuFullReductionEntity implements Serializable {
 	 */
 	private Long skuId;
 	/**
-	 * ?????
+	 * 满多少
 	 */
 	private BigDecimal fullPrice;
 	/**
-	 * ?????
+	 * 减多少
 	 */
 	private BigDecimal reducePrice;
 	/**
-	 * ?Ƿ??????????Ż
+	 * 是否参与其他优惠
 	 */
 	private Integer addOther;
 

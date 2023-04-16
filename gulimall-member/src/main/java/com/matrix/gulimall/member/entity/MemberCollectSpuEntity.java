@@ -8,11 +8,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ??Ա?ղص???Ʒ
+ * 会员收藏的商品
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-07 23:59:48
+ * @date 2023-04-16 20:07:55
  */
 @Data
 @TableName("ums_member_collect_spu")
@@ -25,7 +25,7 @@ public class MemberCollectSpuEntity implements Serializable {
 	@TableId
 	private Long id;
 	/**
-	 * ??Աid
+	 * 会员id
 	 */
 	private Long memberId;
 	/**

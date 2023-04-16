@@ -8,11 +8,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ??Ա?ղص?ר???
+ * 会员收藏的专题活动
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-07 23:59:49
+ * @date 2023-04-16 20:07:55
  */
 @Data
 @TableName("ums_member_collect_subject")
@@ -37,7 +37,7 @@ public class MemberCollectSubjectEntity implements Serializable {
 	 */
 	private String subjectImg;
 	/**
-	 * ?url
+	 * 活动url
 	 */
 	private String subjectUrll;
 

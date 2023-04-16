@@ -12,3 +12,16 @@ spring:
         uri: https://www.qq.com
         predicates:
           - Query=url,qq
+      - id: product_route
+        uri: lb://gulimall-product
+        predicates:
+          - Path=/api/product/**
+        filters:
+          - RewritePath=/api(?<segment>.*),/$\{segment}
+      # 指定路径就路由到指定位置(只要path中有api就路由到renren-fast),   lb : 负载均衡
+      - id: admin_route
+        uri: lb://renren-fast
+        predicates:
+          - Path=/api/**
+        filters:
+          - RewritePath=/api(?<segment>.*),/renren-fast/$\{segment}

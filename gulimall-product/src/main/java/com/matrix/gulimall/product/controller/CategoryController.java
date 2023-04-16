@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
 /**
  * ??Ʒ???????
  *
@@ -31,9 +30,9 @@ public class CategoryController {
      * 商品分类树形结构
      */
     @RequestMapping("/list/tree")
-    public R list(){
+    public R list() {
         List<CategoryEntity> tree = categoryService.listWithTree();
-        return R.ok().put("tree",tree);
+        return R.ok().put("data", tree);
     }
 
 
@@ -42,8 +41,8 @@ public class CategoryController {
      */
     @RequestMapping("/info/{catId}")
 //  @RequiresPermissions("product:category:info")
-    public R info(@PathVariable("catId") Long catId){
-		CategoryEntity category = categoryService.getById(catId);
+    public R info(@PathVariable("catId") Long catId) {
+        CategoryEntity category = categoryService.getById(catId);
 
         return R.ok().put("category", category);
     }
@@ -53,8 +52,8 @@ public class CategoryController {
      */
     @RequestMapping("/save")
 //  @RequiresPermissions("product:category:save")
-    public R save(@RequestBody CategoryEntity category){
-		categoryService.save(category);
+    public R save(@RequestBody CategoryEntity category) {
+        categoryService.save(category);
 
         return R.ok();
     }
@@ -64,21 +63,21 @@ public class CategoryController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("product:category:update")
-    public R update(@RequestBody CategoryEntity category){
-		categoryService.updateById(category);
+    public R update(@RequestBody CategoryEntity category) {
+        categoryService.updateById(category);
 
         return R.ok();
     }
 
     /**
      * 删除
+     *
+     * @RequestBody: 获取请求体，必须发送post请求，springmvc自动将请求体json转换为对应对象
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:category:delete")
-    public R delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
-
-        return R.ok();
+    public R delete(@RequestBody Long[] catIds) {
+        Boolean aBoolean = categoryService.removeMenuByIds(Arrays.asList(catIds));
+        return R.ok().put("code", aBoolean ? 0 : 1).put("msg", aBoolean ?"删除成功":"删除失败");
     }
 
 }

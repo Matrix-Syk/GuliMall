@@ -9,11 +9,11 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * ?˿???Ϣ
+ * 退款信息
  * 
  * @author matrix
  * @email sunlightcs@gmail.com
- * @date 2023-04-08 00:08:36
+ * @date 2023-04-16 20:25:32
  */
 @Data
 @TableName("oms_refund_info")
@@ -26,23 +26,23 @@ public class RefundInfoEntity implements Serializable {
 	@TableId
 	private Long id;
 	/**
-	 * ?˿??Ķ???
+	 * 退款的订单
 	 */
 	private Long orderReturnId;
 	/**
-	 * ?˿??
+	 * 退款金额
 	 */
 	private BigDecimal refund;
 	/**
-	 * ?˿????ˮ?
+	 * 退款交易流水号
 	 */
 	private String refundSn;
 	/**
-	 * ?˿?״̬
+	 * 退款状态
 	 */
 	private Integer refundStatus;
 	/**
-	 * ?˿?????[1-֧??????2-΢?ţ?3-??????4-???
+	 * 退款渠道[1-支付宝，2-微信，3-银联，4-汇款]
 	 */
 	private Integer refundChannel;
 	/**

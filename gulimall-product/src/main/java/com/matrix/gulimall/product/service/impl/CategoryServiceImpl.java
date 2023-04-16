@@ -51,4 +51,19 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return childrens;
     }
 
+    @Override
+    public Boolean removeMenuByIds(List<Long> asList) {
+        for (Long aLong : asList) {
+            CategoryEntity categoryEntity = baseMapper.selectById(aLong);
+            if (categoryEntity == null) {
+                return false;
+            } else if (categoryEntity.getChildren() == null) {
+                // 逻辑删除
+                baseMapper.deleteById(categoryEntity.getCatId());
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
