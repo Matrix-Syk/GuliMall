@@ -10,9 +10,7 @@ import com.matrix.gulimall.product.entity.CategoryEntity;
 import com.matrix.gulimall.product.service.CategoryService;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -66,4 +64,23 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return false;
     }
 
+    @Override
+    public Long[] queryPath(Long id) {
+        List<Long> path = new ArrayList<>();
+        if (id != null) {
+            path.add(id);
+            getPathList(id, path);
+        }
+        Collections.reverse(path);
+        Long[] pathes = (Long[]) path.toArray(new Long[path.size()]);
+        return pathes;
+    }
+
+    public void getPathList(Long id, List<Long> pathes) {
+        Long parentCid = baseMapper.selectById(id).getParentCid();
+        if (parentCid != 0){
+            pathes.add(parentCid);
+            getPathList(parentCid,pathes);
+        }
+    }
 }

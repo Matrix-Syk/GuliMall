@@ -10,6 +10,7 @@ import com.matrix.gulimall.product.entity.AttrAttrgroupRelationEntity;
 import com.matrix.gulimall.product.service.AttrAttrgroupRelationService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +25,21 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<AttrAttrgroupRelationEntity> queryByGroupId(Long attrGroupId) {
+
+        return baseMapper.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId));
+    }
+
+    @Override
+    public boolean removeRelation(Map<String, Long> relations) {
+
+        Long attrGroupId = relations.get("attrGroupId");
+        Long attrId = relations.get("attrId");
+        int delete = baseMapper.delete(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId).eq("attr_id", attrId));
+        return delete > 0;
     }
 
 }
