@@ -21,17 +21,12 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<AttrAttrgroupRelationEntity> page = this.page(
                 new Query<AttrAttrgroupRelationEntity>().getPage(params),
-                new QueryWrapper<AttrAttrgroupRelationEntity>()
+                new QueryWrapper<>()
         );
 
         return new PageUtils(page);
     }
 
-    @Override
-    public List<AttrAttrgroupRelationEntity> queryByGroupId(Long attrGroupId) {
-
-        return baseMapper.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId));
-    }
 
     @Override
     public boolean removeRelation(Map<String, Long> relations) {
@@ -40,6 +35,12 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         Long attrId = relations.get("attrId");
         int delete = baseMapper.delete(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId).eq("attr_id", attrId));
         return delete > 0;
+    }
+
+    @Override
+    public List<AttrAttrgroupRelationEntity> queryByGroupId(Long attrGroupId) {
+
+        return baseMapper.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId));
     }
 
 }

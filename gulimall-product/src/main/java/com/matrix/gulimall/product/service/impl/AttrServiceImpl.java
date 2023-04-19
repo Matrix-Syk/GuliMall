@@ -9,6 +9,7 @@ import com.matrix.gulimall.product.dao.AttrDao;
 import com.matrix.gulimall.product.entity.AttrEntity;
 import com.matrix.gulimall.product.service.AttrService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -34,9 +35,14 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
     }
 
     @Override
-    public IPage<AttrEntity> queryPageByIds(Map<String, Object> params, List<Long> idList) {
-
-        return null;
+    public PageUtils queryExclusive(@RequestParam Map<String, Object> params, List<Long> idList) {
+        String key = (String) params.get("key");
+        List<AttrEntity> attrEntities= baseMapper.queryExclusive(key,idList);
+        IPage<AttrEntity> page = this.page(new Query<AttrEntity>().getPage(params));
+        page.setSize(attrEntities.size());
+        page.setRecords(attrEntities);
+        return new PageUtils(page);
     }
+
 
 }

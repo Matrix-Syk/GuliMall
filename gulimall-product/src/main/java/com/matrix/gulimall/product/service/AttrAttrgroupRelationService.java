@@ -11,8 +11,8 @@ public interface AttrAttrgroupRelationService extends IService<AttrAttrgroupRela
 
     PageUtils queryPage(Map<String, Object> params);
 
-    List<AttrAttrgroupRelationEntity> queryByGroupId(Long attrGroupId);
-
     boolean removeRelation(Map<String, Long> relations);
+
+    List<AttrAttrgroupRelationEntity> queryByGroupId(Long attrGroupId);
 }
 

@@ -1,6 +1,5 @@
 package com.matrix.gulimall.product.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.matrix.common.utils.PageUtils;
 import com.matrix.common.utils.R;
 import com.matrix.gulimall.product.entity.AttrAttrgroupRelationEntity;
@@ -109,30 +108,28 @@ public class AttrGroupController {
         if (CollectionUtils.isEmpty(relationList)) {
             return R.error().put("msg", "该分组下无属性").put("code", 10002);
         }
-        List<Long> idList = relationList.stream().map((relation) -> {
-            return relation.getAttrId();
-        }).collect(Collectors.toList());
+        List<Long> idList = relationList.stream().map(AttrAttrgroupRelationEntity::getAttrId).collect(Collectors.toList());
         List<AttrEntity> attrEntities = attrService.queryByIdList(idList);
         return R.ok().put("data", attrEntities);
     }
+
     /**
      * 属性分组删除关联属性
      */
     @PostMapping("/attr/relation/delete")
-    public R deleteAttrBrandRelation(@RequestBody Map<String,Long> relations) {
-        boolean isDeleted = relationService.removeRelation(relations);
+    public R deleteAttrBrandRelation(@RequestBody Map<String, Long> relations) {
+        relationService.removeRelation(relations);
         return R.ok();
     }
+
     /**
      * 属性分组删除关联属性
      */
     @GetMapping("/{attrGroupId}/noattr/relation")
-    public R attrBrandRelationPage(@RequestParam Map<String, Object> params,@PathVariable Long attrGroupId) {
-        List<AttrAttrgroupRelationEntity> relationList = relationService.queryByGroupId(attrGroupId);
-        List<Long> idList = relationList.stream().map((relation) -> {
-            return relation.getAttrId();
-        }).collect(Collectors.toList());
-        IPage<AttrEntity> page = attrService.queryPageByIds(params,idList);
-        return R.ok().put("page",page);
+    public R attrBrandRelationPage(@RequestParam Map<String, Object> params, @PathVariable Long attrGroupId) {
+        List<AttrAttrgroupRelationEntity> relations = relationService.queryByGroupId(attrGroupId);
+        List<Long> idList = relations.stream().map(AttrAttrgroupRelationEntity::getAttrId).collect(Collectors.toList());
+        PageUtils page = attrService.queryExclusive(params, idList);
+        return R.ok().put("page", page);
     }
 }
