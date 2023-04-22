@@ -9,6 +9,7 @@ import com.matrix.gulimall.product.dao.AttrAttrgroupRelationDao;
 import com.matrix.gulimall.product.entity.AttrAttrgroupRelationEntity;
 import com.matrix.gulimall.product.service.AttrAttrgroupRelationService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -27,14 +28,16 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         return new PageUtils(page);
     }
 
-
+    @Transactional
     @Override
-    public boolean removeRelation(Map<String, Long> relations) {
+    public boolean removeRelation(List<Map<String, Long>> relations) {
 
-        Long attrGroupId = relations.get("attrGroupId");
-        Long attrId = relations.get("attrId");
-        int delete = baseMapper.delete(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId).eq("attr_id", attrId));
-        return delete > 0;
+        for (Map<String, Long> relation : relations) {
+            Long attrGroupId = relation.get("attrGroupId");
+            Long attrId = relation.get("attrId");
+            baseMapper.delete(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId).eq("attr_id", attrId));
+        }
+        return true;
     }
 
     @Override
@@ -42,5 +45,6 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
 
         return baseMapper.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId));
     }
+
 
 }

@@ -105,6 +105,7 @@ public class AttrGroupController {
     @GetMapping("/{attrGroupId}/attr/relation")
     public R getAttrBrandRelation(@PathVariable Long attrGroupId) {
         List<AttrAttrgroupRelationEntity> relationList = relationService.queryByGroupId(attrGroupId);
+        // 分组下无已关联属性
         if (CollectionUtils.isEmpty(relationList)) {
             return R.error().put("msg", "该分组下无属性").put("code", 10002);
         }
@@ -117,7 +118,7 @@ public class AttrGroupController {
      * 属性分组删除关联属性
      */
     @PostMapping("/attr/relation/delete")
-    public R deleteAttrBrandRelation(@RequestBody Map<String, Long> relations) {
+    public R deleteAttrBrandRelation(@RequestBody List<Map<String, Long>> relations) {
         relationService.removeRelation(relations);
         return R.ok();
     }
@@ -131,5 +132,11 @@ public class AttrGroupController {
         List<Long> idList = relations.stream().map(AttrAttrgroupRelationEntity::getAttrId).collect(Collectors.toList());
         PageUtils page = attrService.queryExclusive(params, idList);
         return R.ok().put("page", page);
+    }
+
+    @PostMapping("/attr/relation")
+    public R groupAddAttr(@RequestBody List<AttrAttrgroupRelationEntity> relations) {
+        relationService.saveBatch(relations);
+        return R.ok();
     }
 }

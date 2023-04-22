@@ -18,4 +18,6 @@ import java.util.List;
 public interface AttrDao extends BaseMapper<AttrEntity> {
 
     List<AttrEntity> queryExclusive(@Param("key") String key, @Param("idList") List<Long> idList);
+
+    Long insertAttrBackId(AttrEntity attrEntity);
 }

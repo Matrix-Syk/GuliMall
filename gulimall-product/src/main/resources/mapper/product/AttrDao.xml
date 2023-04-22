@@ -15,6 +15,9 @@
         <result property="catelogId" column="catelog_id"/>
         <result property="showDesc" column="show_desc"/>
     </resultMap>
+    <insert id="insertAttrBackId" parameterType="com.matrix.gulimall.product.entity.AttrEntity" keyProperty="attrId" useGeneratedKeys="true">
+        INSERT pms_attr VALUES(#{attrId},#{attrName},#{searchType},#{icon},#{valueSelect},#{attrType},#{enable},#{catelogId},#{showDesc})
+    </insert>
     <select id="queryExclusive" parameterType="list" resultType="com.matrix.gulimall.product.entity.AttrEntity">
         SELECT attr_id,
         attr_name,
@@ -26,14 +29,20 @@
         catelog_id,
         show_desc
         FROM pms_attr
-        WHERE
-        <if test="key!=''">
-            attr_id = #{key} or attr_name like #{key} and
+        <if test="idList.size()!=0">
+            WHERE attr_id not in
+            <foreach collection="idList" item="item" index="index" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+            <if test="key!=''">
+                and attr_id = #{key} or attr_name like #{key}
+            </if>
         </if>
-        attr_id not in
-        <foreach collection="idList" item="item" index="index" separator="," open="(" close=")">
-            #{item}
-        </foreach>
+        <if test="idList.size()==0">
+            <if test="key!=''">
+                WHERE attr_id = #{key} or attr_name like #{key}
+            </if>
+        </if>
     </select>
 
 </mapper>

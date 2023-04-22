@@ -22,5 +22,12 @@ public interface AttrService extends IService<AttrEntity> {
     List<AttrEntity> queryByIdList(List<Long> idList);
 
     PageUtils queryExclusive(@RequestParam Map<String, Object> params, List<Long> idList);
+
+    PageUtils queryCategoryAttr(Map<String, Object> params, Long categroyId);
+
+    boolean saveAttr(AttrEntity attrEntity);
+
+    void removeAttrByIds(List<Long> asList);
+
 }
 
