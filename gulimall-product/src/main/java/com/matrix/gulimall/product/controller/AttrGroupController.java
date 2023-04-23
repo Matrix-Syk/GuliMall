@@ -81,9 +81,8 @@ public class AttrGroupController {
      * 修改
      */
     @RequestMapping("/update")
-    //@RequiresPermissions("product:attrgroup:update")
     public R update(@RequestBody AttrGroupEntity attrGroup) {
-        attrGroupService.updateById(attrGroup);
+        attrGroupService.changeGroup(attrGroup);
 
         return R.ok();
     }

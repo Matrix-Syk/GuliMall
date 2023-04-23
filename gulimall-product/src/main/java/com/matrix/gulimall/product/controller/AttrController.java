@@ -6,11 +6,13 @@ import com.matrix.gulimall.product.entity.AttrAttrgroupRelationEntity;
 import com.matrix.gulimall.product.entity.AttrEntity;
 import com.matrix.gulimall.product.service.AttrAttrgroupRelationService;
 import com.matrix.gulimall.product.service.AttrService;
+import com.matrix.gulimall.product.service.CategoryService;
 import com.matrix.gulimall.product.vo.AttrVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -31,6 +33,9 @@ public class AttrController {
     @Autowired
     private AttrAttrgroupRelationService relationService;
 
+    @Resource
+    private CategoryService categoryService;
+
     /**
      * 列表
      */
@@ -50,8 +55,15 @@ public class AttrController {
     //@RequiresPermissions("product:attr:info")
     public R info(@PathVariable("attrId") Long attrId) {
         AttrEntity attr = attrService.getById(attrId);
-
-        return R.ok().put("attr", attr);
+        Long[] longs = categoryService.queryPath(attr.getAttrId());
+        AttrAttrgroupRelationEntity relationEntity = relationService.queryByAttrId(attrId);
+        AttrVo attrVo = new AttrVo();
+        BeanUtils.copyProperties(attr, attrVo);
+        attrVo.setCatelogPath(longs);
+        if (relationEntity != null) {
+            attrVo.setAttrGroupId(relationEntity.getId());
+        }
+        return R.ok().put("attr", attrVo);
     }
 
     /**
@@ -63,7 +75,7 @@ public class AttrController {
         BeanUtils.copyProperties(attr, attrEntity);
         attrService.saveAttr(attrEntity);
         if (attrEntity.getAttrId() == null) {
-            return R.error().put("msg","同名属性已存在");
+            return R.error().put("msg", "同名属性已存在");
         }
         Long groupId = attr.getAttrGroupId();
         if (groupId != null) {

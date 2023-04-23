@@ -48,4 +48,6 @@ public class AttrVo implements Serializable {
     private Integer showDesc;
 
     private Long attrGroupId;
+
+    private Long[] catelogPath;
 }

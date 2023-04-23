@@ -46,5 +46,10 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         return baseMapper.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroupId));
     }
 
+    @Override
+    public AttrAttrgroupRelationEntity queryByAttrId(Long attrId) {
+        return baseMapper.selectByAttrId(attrId);
+    }
+
 
 }

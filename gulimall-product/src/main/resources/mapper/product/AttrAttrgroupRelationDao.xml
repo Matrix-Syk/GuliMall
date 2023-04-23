@@ -16,6 +16,15 @@
             #{item}
         </foreach>
     </delete>
+    <delete id="deleteBatchGroupIds">
+        DELETE FROM `pms_attr_attrgroup_relation` WHERE attr_group_id IN
+        <foreach collection="groupIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+    <select id="selectByAttrId" resultType="com.matrix.gulimall.product.entity.AttrAttrgroupRelationEntity">
+        select id,attr_id,attr_group_id,attr_sort from `pms_attr_attrgroup_relation` where attr_id = #{attrId}
+    </select>
 
 
 </mapper>

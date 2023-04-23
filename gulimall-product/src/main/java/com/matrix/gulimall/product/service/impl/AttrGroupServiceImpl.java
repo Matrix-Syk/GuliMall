@@ -5,17 +5,26 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.matrix.common.utils.PageUtils;
 import com.matrix.common.utils.Query;
+import com.matrix.gulimall.product.dao.AttrAttrgroupRelationDao;
 import com.matrix.gulimall.product.dao.AttrGroupDao;
+import com.matrix.gulimall.product.entity.AttrAttrgroupRelationEntity;
 import com.matrix.gulimall.product.entity.AttrGroupEntity;
 import com.matrix.gulimall.product.service.AttrGroupService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service("attrGroupService")
 public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEntity> implements AttrGroupService {
+
+    @Resource
+    private AttrAttrgroupRelationDao relationDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -42,6 +51,17 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         }
         IPage<AttrGroupEntity> page = this.page(iPage, wrapper);
         return new PageUtils(page);
+    }
+
+    @Transactional
+    @Override
+    public void changeGroup(AttrGroupEntity attrGroup) {
+        baseMapper.updateById(attrGroup);
+        List<AttrAttrgroupRelationEntity> relations = relationDao.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrGroup.getAttrGroupId()));
+        if (relations.size() > 0) {
+            List<Long> groupIds = relations.stream().map(AttrAttrgroupRelationEntity::getAttrGroupId).collect(Collectors.toList());
+            relationDao.deleteBatchGroupIds(groupIds);
+        }
     }
 
 }
